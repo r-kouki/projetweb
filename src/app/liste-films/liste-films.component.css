@@ -63,3 +63,19 @@ h2::after {
 h2:hover::after {
   width: 200px;
 }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+img {
+  max-width: 200px;
+  height: auto;
+}

@@ -1,17 +1,23 @@
-<h2>liste des films </h2>
+<h2>liste des films</h2>
 
 <div class="block">
-  <div>
-    <h4>Nom du film : {{tabFilms[0].nomFilm}}</h4>
-    <img class="image" [src]="tabFilms[0].imageFilm"><br>
-    <button (click)="onJaime()">J’aime</button>
-  </div>
-  <div>
-    <h4>Nom du film : {{tabFilms[1].nomFilm}}</h4>
-    <img class="image" [src]="tabFilms[1].imageFilm"> <br>
-  </div>
-  <div>
-    <h4>Nom du film : {{tabFilms[2].nomFilm}}</h4>
-    <img class="image" [src]="tabFilms[2].imageFilm"><br>
+  <div *ngFor="let film of tabFilms; let i = index" [ngStyle]="{'background-color': getColor(film.nbJaime, film.nbJeNaimeps)}">
+    <h4 >{{ film.nomFilm }}</h4>
+    <div *ngIf="film.disponible; then thenblock else elseblock"></div>
+    <ng-template #thenblock>
+      {{film.nomFilm}} est disponible
+    </ng-template><br>
+    <ng-template #elseblock>
+      {{film.nomFilm}} n'est pas disponible
+    </ng-template><br>
+    <img [src]="film.imageFilm" alt="{{ film.nomFilm }}" class="image">
+    <div class="actions">
+      <button (click)="onJaime(i)">
+        J'aime ({{ film.nbJaime }})
+      </button>
+      <button (click)="onJeNaimePas(i)">
+        Je n'aime pas ({{ film.nbJeNaimeps }})
+      </button>
+    </div>
   </div>
 </div>

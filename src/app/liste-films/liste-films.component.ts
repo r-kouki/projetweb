@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-liste-films',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './liste-films.component.html',
   styleUrl: './liste-films.component.css'
 })
@@ -26,11 +27,27 @@ export class ListeFilmsComponent {
    }
     ] ;
 
-}
-onJaime() {
-  console.log('J\'aime ce film');
+  getColor(x: number, y: number): string {
+    if (x > y) {
+      return '#1c8454'; // green
+    } else if (x < y) {
+      return '#dc3444'; // red
+    } else {
+      return '#ffffff'; // white
+    }
   }
-function onJaime() {
-  throw new Error('Function not implemented.');
+
+  getTextColor(x: number, y: number): string {
+    // Always return a dark color for text to ensure visibility
+    return '#333333';
+  }
+
+  onJaime(index: number): void {
+    this.tabFilms[index].nbJaime++;
+  }
+
+  onJeNaimePas(index: number): void {
+    this.tabFilms[index].nbJeNaimeps++;
+  }
 }
 
